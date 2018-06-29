@@ -1,0 +1,55 @@
+{
+  "private": true,
+  "name": "@undataforum/2018-website",
+  "description": "Website for the 2018 UN Data Forum.",
+  "version": "0.0.0",
+  "author": {
+    "name": "Thilo Maier",
+    "email": "maier@un.org"
+  },
+  "homepage": "https://2018.undataforum.org",
+  "keywords": [
+    "gatsby"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "start": "gatsby develop",
+    "build": "rimraf ./public && gatsby build",
+    "deploy": "yarn run build && gh-pages -d ./public",
+    "format": "pretty-quick",
+    "inspect": "node --inspect-brk node_modules/.bin/gatsby develop",
+    "lint": "eslint --ignore-path .gitignore .",
+    "precommit": "pretty-quick --staged",
+    "release": "release",
+    "postrelease": "yarn run deploy"
+  },
+  "dependencies": {
+    "@undataforum/components": "^0.2.2",
+    "babel-eslint": "^7.2.3",
+    "babel-plugin-styled-components": "^1.5.1",
+    "babel-preset-react-app": "^3.1.1",
+    "eslint": "^4.1.1",
+    "eslint-config-react-app": "^2.1.0",
+    "eslint-plugin-flowtype": "^2.34.1",
+    "eslint-plugin-import": "^2.6.0",
+    "eslint-plugin-jsx-a11y": "^5.1.1",
+    "eslint-plugin-react": "^7.1.0",
+    "gatsby": "^1.9.254",
+    "gatsby-link": "^1.6.40",
+    "gatsby-plugin-react-helmet": "^2.0.10",
+    "gatsby-plugin-sharp": "^1.6.44",
+    "gatsby-remark-autolink-headers": "^1.4.18",
+    "gatsby-remark-smartypants": "^1.4.12",
+    "gatsby-source-filesystem": "^1.5.35",
+    "gatsby-transformer-remark": "^1.7.40",
+    "gatsby-transformer-sharp": "^1.6.24",
+    "gh-pages": "^1.2.0",
+    "husky": "^0.14.3",
+    "prettier": "^1.13.7",
+    "pretty-quick": "^1.6.0",
+    "react-helmet": "^5.2.0",
+    "release": "^4.0.1",
+    "rimraf": "^2.6.2",
+    "styled-components": "^3.2.6"
+  }
+}
