@@ -2,8 +2,8 @@ module.exports = {
   siteMetadata: {
     title: "UN World Data Forum",
     description:
-      "The UN World Data Forum 2018 will take place 22-24 October 2018 in Dubai, United Arab Emirates.",
-    siteUrl: "https://www.undataforum.org"
+      "The 2018 UN World Data Forum takes place 22-24 October 2018 in Dubai, United Arab Emirates.",
+    siteUrl: "https://2018.undataforum.org"
   },
   plugins: [
     {
