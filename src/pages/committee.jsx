@@ -1,26 +1,45 @@
 import React from "react";
-import { ProfileList } from "@undataforum/components";
+import { Link, graphql } from "gatsby";
+import { Container, List, ProfilePreview } from "@undataforum/components";
+import Layout from "../components/Layout";
 
-const Committee = ({
-  data: { allMarkdownRemark: profiles, allImageSharp: images }
+const Page = ({
+  data: {
+    allMarkdownRemark: { edges: profiles },
+    allImageSharp: { edges: images }
+  }
 }) => (
-  <ProfileList
-    profiles={profiles.edges.map(({ node }, index) => ({
-      name: `${node.frontmatter.firstName} ${node.frontmatter.lastName}`,
-      jobtitle: node.frontmatter.jobtitle,
-      organization: node.frontmatter.organization,
-      slug: node.fields.slug,
-      href: node.fields.path,
-      img: images.edges[index].node.resize.src
-    }))}
-  />
+  <Layout>
+    <Container maxWidth={7} mt={3} px={0}>
+      <List
+        anchor={({ href, children }) => <Link to={href}>{children}</Link>}
+        item={props => <ProfilePreview {...props} pb={3} mb={3} px={[2, 3]} />}
+        values={profiles.map(
+          (
+            {
+              node: {
+                frontmatter: { firstName, lastName, jobtitle, organization },
+                fields: { path }
+              }
+            },
+            index
+          ) => ({
+            name: `${firstName} ${lastName}`,
+            jobtitle,
+            organization,
+            href: path,
+            img: images[index].node.resize.src
+          })
+        )}
+      />
+    </Container>
+  </Layout>
 );
 
-export default Committee;
+export default Page;
 
-// eslint-disable-next-line no-undef
-export const query = graphql`
-  query Committee {
+export const pageQuery = graphql`
+  query {
     allMarkdownRemark(
       filter: { frontmatter: { committee: { eq: true } } }
       sort: {

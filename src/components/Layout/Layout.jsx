@@ -1,8 +1,11 @@
 import React from "react";
-import { Link } from "gatsby";
-import Head from "../Head";
-import { StaticQuery, graphql } from "gatsby";
-import { AlternateTitle, Header, Provider } from "@undataforum/components";
+import { Link, StaticQuery, graphql } from "gatsby";
+import {
+  AlternateTitle,
+  Head,
+  Header,
+  Provider
+} from "@undataforum/components";
 
 const internalLink = ({ href, children }) => <Link to={href}>{children}</Link>;
 

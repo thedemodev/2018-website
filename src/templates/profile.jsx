@@ -1,11 +1,38 @@
 import React from "react";
-import { ProfileHeader } from "@undataforum/components";
+import rehypeReact from "rehype-react";
+import { Link, graphql } from "gatsby";
+import { A, ContentPage, P, ProfileHeader } from "@undataforum/components";
+import Layout from "../components/Layout";
 
-const Template = ({
+// External links open in new browser tab.
+const externalLink = ({ href, children }) => (
+  <a href={href} target="_blank" rel="noreferrer noopener">
+    {children}
+  </a>
+);
+
+const Anchor = ({ href, children }) => (
+  <A anchor={externalLink} href={href}>
+    {children}
+  </A>
+);
+
+const renderAst = new rehypeReact({
+  createElement: React.createElement,
+  components: {
+    a: Anchor,
+    p: P
+  }
+}).Compiler;
+
+const Profile = ({
   data: {
+    site: {
+      siteMetadata: { title, description }
+    },
     markdownRemark: {
-      html,
-      frontmatter: { firstName, lastName, committee }
+      frontmatter: { firstName, lastName, committee },
+      htmlAst
     },
     imageSharp: {
       resize: { src: img }
@@ -22,20 +49,33 @@ const Template = ({
     });
   }
   return (
-    <div>
-      <ProfileHeader name={name} img={img} badges={badges} />
-      <div dangerouslySetInnerHTML={{ __html: html }} />
-    </div>
+    <Layout>
+      <ContentPage siteTitle={title} pageTitle={name} description={description}>
+        <ProfileHeader
+          anchor={({ href, children }) => <Link to={href}>{children}</Link>}
+          name={name}
+          img={img}
+          badges={badges}
+          mb={3}
+        />
+        {renderAst(htmlAst)}
+      </ContentPage>
+    </Layout>
   );
 };
 
-export default Template;
+export default Profile;
 
-// eslint-disable-next-line no-undef
-export const query = graphql`
+export const profileQuery = graphql`
   query Profile($slug: String!) {
+    site {
+      siteMetadata {
+        title
+        description
+      }
+    }
     markdownRemark(fields: { slug: { eq: $slug } }) {
-      html
+      htmlAst
       frontmatter {
         firstName
         lastName

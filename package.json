@@ -19,12 +19,10 @@
     "format": "pretty-quick",
     "inspect": "node --inspect-brk node_modules/.bin/gatsby develop",
     "lint": "eslint --ignore-path .gitignore .",
-    "precommit": "pretty-quick --staged",
-    "release": "release",
-    "postrelease": "yarn run deploy"
+    "precommit": "pretty-quick --staged"
   },
   "dependencies": {
-    "@undataforum/components": "^0.7.0",
+    "@undataforum/components": "^0.15.0",
     "gatsby": "^2.0.0-beta.29",
     "gatsby-plugin-react-helmet": "^3.0.0-beta.3",
     "gatsby-plugin-sharp": "^2.0.0-beta.3",
@@ -51,7 +49,6 @@
     "husky": "^0.14.3",
     "prettier": "^1.13.7",
     "pretty-quick": "^1.6.0",
-    "release": "^4.0.1",
     "rimraf": "^2.6.2"
   }
 }
